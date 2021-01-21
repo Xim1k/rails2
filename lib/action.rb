@@ -81,22 +81,4 @@ class Action
   def self.check_money(money)
     money >= 0
   end
-
 end
-
-# p Action.check_fun(13)
-
- class Valera
-   attr_accessor :condition
-
-   def initialize()
-     file_name = File.expand_path("conf.yaml", __dir__)
-     @condition = YAML.safe_load(File.open(file_name))
-   end
- end
-
- valera = Valera.new
- p valera.condition['hp']
- Action.rest(valera.condition)
- p valera.condition['hp']
- p Action.check_fun(valera.condition['fun'])
