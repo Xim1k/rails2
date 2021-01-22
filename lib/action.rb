@@ -81,4 +81,5 @@ class Action
   def self.check_money(money)
     money >= 0
   end
+
 end
