@@ -50,7 +50,7 @@ class Action
   end
 
   def sing_in_metro(condition)
-    if (condition['mana'] > 40) && (condition['mana'] < 70)
+    if condition['mana'].between?(40, 70)
       condition['money'] += 60
     else
       condition['money'] += 10
