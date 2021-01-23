@@ -50,12 +50,12 @@ class Action
   end
 
   def sing_in_metro(condition)
-    if condition['mana'].between?(40, 70)
-      condition['money'] += 60
-    else
-      condition['money'] += 10
-    end
-    
+    condition['money'] += if condition['mana'].between?(40, 70)
+                            60
+                          else
+                            10
+                          end
+
     condition['fun'] += 1
     condition['mana'] += 10
     condition['tiredness'] += 20
@@ -87,7 +87,7 @@ class Action
     money >= 0
   end
 
-  def check_hp(hp)
-    hp.between?(0, 100)
+  def check_hp(health)
+    health.between?(0, 100)
   end
 end
