@@ -15,19 +15,13 @@ class Loader
 
   def loader(valera)
     loop do
-      p('Введите имя пользователя')
-      @file_name = "../saves/#{$stdin.gets.strip}.yaml"
+      puts('Введите имя пользователя')
+      @file_name = File.expand_path("../saves/#{$stdin.gets.strip}.yaml", __dir__)
       break if exist
 
       puts('Такого пользователя не существует')
     end
-    @file_name = File.expand_path("../saves/#{@file_name}", __dir__)
+
     load(valera)
   end
 end
-
-#valera = Valera.new
-#p valera.condition
-#loader = Loader.new.loader(valera)
-#p valera.condition
-# p valera.condition

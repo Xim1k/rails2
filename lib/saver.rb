@@ -12,13 +12,9 @@ class Saver
   end
 
   def saver(valera)
-    p('Введите имя пользователя')
-    @file_name = "../saves/#{$stdin.gets.strip}.yaml"
+    puts("Введите имя пользователя")
+    @file_name  = File.expand_path("../saves/#{$stdin.gets.strip}.yaml", __dir__)
     @valera = valera
     save
   end
 end
-
-#valera = Valera.new
-#valera.condition['hp'] -= 90
-#saver = Saver.new.saver(valera)

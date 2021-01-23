@@ -1,5 +1,6 @@
 require_relative 'Valera'
 require_relative 'action'
+
 class Menu
   def print_main_menu
     puts("1.Новая игра")
@@ -28,8 +29,8 @@ class Menu
     puts("Деньги: #{valera.condition['money']}")
   end
 end
-a = Menu.new
-valera = Valera.new
+# a = Menu.new
+# valera = Valera.new
 #a.print_condition(valera)
 #a.print_main_menu
 #a.print_actions_menu
