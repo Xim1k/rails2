@@ -15,7 +15,7 @@ class Loader
 
   def loader(valera)
     loop do
-      puts('Введите имя пользователя')
+      puts('Введите название сохранения')
       @file_name = File.expand_path("../saves/#{$stdin.gets.strip}.yaml", __dir__)
       break if exist
 

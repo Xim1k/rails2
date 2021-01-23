@@ -12,7 +12,7 @@ class Saver
   end
 
   def saver(valera)
-    puts("Введите имя пользователя")
+    puts("Введите название сохранения")
     @file_name  = File.expand_path("../saves/#{$stdin.gets.strip}.yaml", __dir__)
     @valera = valera
     save
