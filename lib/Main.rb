@@ -36,8 +36,8 @@ class Main
 
   def check_valera
     unless @action.check_mana(@valera.condition['mana'])
-      @valera.condition['mana'] = 0 if @valera.condition['mana'] < 0
-      abort 'Алгоколь сыграл соло на сердце. Пожилой умер под забором.' if @valera.condition['mana'] > 0
+      @valera.condition['mana'] = 0 if @valera.condition['mana'].negative?
+      abort 'Алгоколь сыграл соло на сердце. Пожилой умер под забором.' if @valera.condition['mana'].positive?
     end
 
     unless @action.check_fun(@valera.condition['fun'])
@@ -46,7 +46,7 @@ class Main
     end
 
     unless @action.check_tire(@valera.condition['tiredness'])
-      @valera.condition['tiredness'] = 0 if @valera.condition['tiredness'] < 0
+      @valera.condition['tiredness'] = 0 if @valera.condition['tiredness'].negative?
       abort 'Работяга переработал. Валера решил прилечь под прессом.' if @valera.condition['tiredness'] > 100
     end
 
@@ -54,7 +54,7 @@ class Main
 
     unless @action.check_hp(@valera.condition['hp'])
       @valera.condition['hp'] = 100 if @valera.condition['hp'] > 100
-      abort 'Здоровье подкачало. ВДВ умер в постели. Вечная память кролу' if @valera.condition['hp'] < 0
+      abort 'Здоровье подкачало. ВДВ умер в постели. Вечная память кролу' if @valera.condition['hp'].negative?
     end
   end
 
@@ -103,8 +103,8 @@ class Main
         end
 
         if action == 8
-          system('clear')
-          saver = Saver.new.saver(@valera)
+
+          Saver.new.saver(@valera)
           puts('Игра сохранена')
 
           return

@@ -3,8 +3,6 @@ require 'pathname'
 require_relative '../lib/Valera'
 
 class Loader
-  @file_name
-
   def load(valera)
     valera.condition = YAML.safe_load(File.open(@file_name))
   end

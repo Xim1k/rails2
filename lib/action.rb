@@ -6,7 +6,7 @@ class Action
       condition['money'] += 100
       condition['tiredness'] += 70
     else
-        puts("\nРаботать можно только если алкоголь < 50, усталость < 10")
+      puts("\nРаботать можно только если алкоголь < 50, усталость < 10")
     end
     condition
   end
@@ -26,7 +26,7 @@ class Action
       condition['hp'] -= 5
       condition['money'] -= 20
     else
-        puts("\nИзвини, ты не нашкреб на винишко(Нужно не менее 20$)")
+      puts("\nИзвини, ты не нашкреб на винишко(Нужно не менее 20$)")
     end
     condition
   end
@@ -39,7 +39,7 @@ class Action
       condition['hp'] -= 10
       condition['money'] -= 100
     else
-       puts("\nВ бар без сотки? Пора на работу!(Нужно не менее 100$)")
+      puts("\nВ бар без сотки? Пора на работу!(Нужно не менее 100$)")
     end
     condition
   end
@@ -52,17 +52,17 @@ class Action
       condition['hp'] -= 80
       condition['money'] -= 150
     else
-        puts("\nС твоими финансами только боярышник глушить.(Нужно не менее 150$)")
+      puts("\nС твоими финансами только боярышник глушить.(Нужно не менее 150$)")
     end
     condition
   end
 
   def sing_in_metro(condition)
-    if (condition['mana'] > 40) && (condition['mana'] < 70)
-      condition['money'] += 60
-    else
-      condition['money'] += 10
-    end
+    condition['money'] += if condition['mana'].between?(40, 70)
+                            60
+                          else
+                            10
+                          end
 
     condition['fun'] += 1
     condition['mana'] += 10
@@ -95,7 +95,7 @@ class Action
     money >= 0
   end
 
-  def check_hp(hp)
-    hp.between?(0, 100)
+  def check_hp(health)
+    health.between?(0, 100)
   end
 end
