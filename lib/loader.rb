@@ -1,6 +1,6 @@
 require 'yaml'
 require 'pathname'
-require_relative '../lib/Valera'
+require_relative '../lib/valera'
 
 class Loader
   def load(valera)

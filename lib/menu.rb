@@ -1,4 +1,4 @@
-require_relative 'Valera'
+require_relative 'valera'
 require_relative 'action'
 
 class Menu
