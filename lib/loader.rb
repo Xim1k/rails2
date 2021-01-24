@@ -17,7 +17,7 @@ class Loader
       @file_name = File.expand_path("../saves/#{$stdin.gets.strip}.yaml", __dir__)
       break if exist
 
-      puts('Такого пользователя не существует')
+      puts('Такого сохранения не существует')
     end
 
     load(valera)

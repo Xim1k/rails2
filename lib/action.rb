@@ -89,7 +89,6 @@ class Action
     condition['fun'] += 1
     condition['mana'] += 10
     condition['tiredness'] += 20
-    condition['money'] += 10
 
     check_valera_stats(condition)
     check_valera_death(condition)
@@ -103,25 +102,23 @@ class Action
     condition['fun'] -= 3 if condition['mana'] > 70
     condition['mana'] -= 50
     condition['tiredness'] -= 70
-
     check_valera_stats(condition)
     check_valera_death(condition)
-
     condition
   end
-end
 
-def check_valera_stats(condition)
-  condition['mana'] = 0 if condition['mana'].negative?
-  condition['fun'] = 0 if condition['fun'] > 10
-  condition['tiredness'] = 0 if condition['tiredness'].negative?
-  condition['hp'] = 100 if condition['hp'] > 100
-end
+  def check_valera_stats(condition)
+    condition['mana'] = 0 if condition['mana'].negative?
+    condition['fun'] = 0 if condition['fun'] > 10
+    condition['tiredness'] = 0 if condition['tiredness'].negative?
+    condition['hp'] = 100 if condition['hp'] > 100
+  end
 
-def check_valera_death(condition)
-  abort 'Алгоколь сыграл соло на сердце. Пожилой умер под забором.' if condition['mana'] > 100
-  abort 'Работяга переработал. Валера решил прилечь под прессом.' if condition['tiredness'] > 100
-  abort 'Преисполниться не получилось. Валера помер от грусти' if condition['fun'] < -10
-  abort 'Дружок-пирожок, че с деньгами? Валеру убили за долги.' unless condition['money'] >= 0
-  abort 'Здоровье подкачало. ВДВ умер в постели. Вечная память кролу' if condition['hp'].negative?
+  def check_valera_death(condition)
+    abort 'Алгоколь сыграл соло на сердце. Пожилой умер под забором.' if condition['mana'] > 100
+    abort 'Работяга переработал. Валера решил прилечь под прессом.' if condition['tiredness'] > 100
+    abort 'Преисполниться не получилось. Валера помер от грусти' if condition['fun'] < -10
+    abort 'Дружок-пирожок, че с деньгами? Валеру убили за долги.' unless condition['money'] >= 0
+    abort 'Здоровье подкачало. ВДВ умер в постели. Вечная память кролу' if condition['hp'].negative?
+  end
 end
