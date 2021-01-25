@@ -19,4 +19,24 @@ class Valera
 
     false
   end
+
+  def self.check_valera_death(condition)
+    if condition['mana'] > 100
+      p 'Алгоколь сыграл соло на сердце. Пожилой умер под забором.'
+      return true
+    end
+    if condition['tiredness'] > 100
+      p 'Работяга переработал. Валера решил прилечь под прессом.'
+      return true
+    end
+    if condition['fun'] < -10
+      p 'Преисполниться не получилось. Валера помер от грусти' if condition['fun'] < -10
+      return true
+    end
+    if condition['hp'].negative?
+      p 'Здоровье подкачало. ВДВ умер в постели. Вечная память кролу'
+      return true
+    end
+    false
+  end
 end

@@ -19,20 +19,16 @@ class Main
         @menu.print_main_menu
         action = gets.chomp.to_i
 
-        if action == 1
-          start_game
-          abort
-        end
+        start_game if action == 1
 
         if action == 2
           Loader.new.loader(@valera)
           start_game
-          abort
         end
 
         exit 1 if action == 3
 
-        puts('Введите значение в диапозоне от 1 до 3')
+        puts('Введите значение в диапозоне от 1 до 3') unless action.between?(1, 3)
       end
     end
   end
@@ -40,9 +36,8 @@ class Main
   def start_game
     loop do
       loop do
-        @menu.print_condition(@valera)
-        @menu.print_reference
-        @menu.print_actions_menu
+        new_game
+        print_info
         @current_action = gets.chomp.to_i
 
         return if @current_action == 9
@@ -87,6 +82,19 @@ class Main
     when 7
       @valera.condition = @action.go_to_sleep(@valera.condition)
     end
+  end
+
+  def print_info
+    @menu.print_condition(@valera)
+    @menu.print_reference
+    @menu.print_actions_menu
+  end
+
+  def new_game
+    return unless @valera.condition['dead']
+
+    initialize
+    start_menu
   end
 end
 

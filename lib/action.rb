@@ -1,3 +1,5 @@
+require_relative 'valera'
+
 class Action
   def work(condition)
     system('clear')
@@ -8,7 +10,7 @@ class Action
       condition['tiredness'] += 70
 
       check_valera_stats(condition)
-      check_valera_death(condition)
+      condition['dead'] = Valera.check_valera_death(condition)
     else
       puts("\nРаботать можно только если алкоголь < 50, усталость < 10")
     end
@@ -22,8 +24,7 @@ class Action
     condition['tiredness'] += 10
 
     check_valera_stats(condition)
-    check_valera_death(condition)
-
+    condition['dead'] = Valera.check_valera_death(condition)
     condition
   end
 
@@ -37,7 +38,7 @@ class Action
       condition['money'] -= 20
 
       check_valera_stats(condition)
-      check_valera_death(condition)
+      condition['dead'] = Valera.check_valera_death(condition)
     else
       puts("\nИзвини, ты не нашкреб на винишко(Нужно не менее 20$)")
     end
@@ -54,7 +55,7 @@ class Action
       condition['money'] -= 100
 
       check_valera_stats(condition)
-      check_valera_death(condition)
+      condition['dead'] = Valera.check_valera_death(condition)
     else
       puts("\nВ бар без сотки? Пора на работу!(Нужно не менее 100$)")
     end
@@ -71,7 +72,7 @@ class Action
       condition['money'] -= 150
 
       check_valera_stats(condition)
-      check_valera_death(condition)
+      condition['dead'] = Valera.check_valera_death(condition)
     else
       puts("\nС твоими финансами только боярышник глушить.(Нужно не менее 150$)")
     end
@@ -91,8 +92,7 @@ class Action
     condition['tiredness'] += 20
 
     check_valera_stats(condition)
-    check_valera_death(condition)
-
+    condition['dead'] = Valera.check_valera_death(condition)
     condition
   end
 
@@ -103,7 +103,7 @@ class Action
     condition['mana'] -= 50
     condition['tiredness'] -= 70
     check_valera_stats(condition)
-    check_valera_death(condition)
+    condition['dead'] = Valera.check_valera_death(condition)
     condition
   end
 
@@ -112,13 +112,5 @@ class Action
     condition['fun'] = 0 if condition['fun'] > 10
     condition['tiredness'] = 0 if condition['tiredness'].negative?
     condition['hp'] = 100 if condition['hp'] > 100
-  end
-
-  def check_valera_death(condition)
-    abort 'Алгоколь сыграл соло на сердце. Пожилой умер под забором.' if condition['mana'] > 100
-    abort 'Работяга переработал. Валера решил прилечь под прессом.' if condition['tiredness'] > 100
-    abort 'Преисполниться не получилось. Валера помер от грусти' if condition['fun'] < -10
-    abort 'Дружок-пирожок, че с деньгами? Валеру убили за долги.' unless condition['money'] >= 0
-    abort 'Здоровье подкачало. ВДВ умер в постели. Вечная память кролу' if condition['hp'].negative?
   end
 end
