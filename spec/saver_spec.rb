@@ -9,6 +9,7 @@ RSpec.describe Saver do
       loader = Loader.new
       let(:condition) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 0,
           'fun' => 5,

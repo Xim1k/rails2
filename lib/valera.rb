@@ -30,7 +30,7 @@ class Valera
       return true
     end
     if condition['fun'] < -10
-      p 'Преисполниться не получилось. Валера помер от грусти' if condition['fun'] < -10
+      p 'Преисполниться не получилось. Валера помер от грусти'
       return true
     end
     if condition['hp'].negative?

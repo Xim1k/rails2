@@ -3,8 +3,53 @@ require './lib/action'
 RSpec.describe Action do
   describe '#Action list' do
     action = Action.new
+    let(:mana_death) do
+      {
+        'dead' => false,
+        'hp' => 100,
+        'mana' => 101,
+        'fun' => 10,
+        'tiredness' => 5,
+        'money' => 1000
+      }
+    end
+
+    let(:tiredness_death) do
+      {
+        'dead' => false,
+        'hp' => 100,
+        'mana' => 10,
+        'fun' => 10,
+        'tiredness' => 500,
+        'money' => 1000
+      }
+    end
+
+    let(:fun_death) do
+      {
+        'dead' => false,
+        'hp' => 100,
+        'mana' => 10,
+        'fun' => -110,
+        'tiredness' => 50,
+        'money' => 1000
+      }
+    end
+
+    let(:hp_death) do
+      {
+        'dead' => false,
+        'hp' => -100,
+        'mana' => 10,
+        'fun' => 10,
+        'tiredness' => 50,
+        'money' => 1000
+      }
+    end
+
     let(:no_work_condition) do
       {
+        'dead' => false,
         'hp' => 100,
         'mana' => 60,
         'fun' => 10,
@@ -15,6 +60,7 @@ RSpec.describe Action do
 
     let(:money_condition) do
       {
+        'dead' => false,
         'hp' => 100,
         'mana' => 60,
         'fun' => 10,
@@ -25,6 +71,7 @@ RSpec.describe Action do
 
     let(:condition) do
       {
+        'dead' => false,
         'hp' => 100,
         'mana' => 10,
         'fun' => 10,
@@ -35,6 +82,7 @@ RSpec.describe Action do
 
     let(:condition_for_metro) do
       {
+        'dead' => false,
         'hp' => 100,
         'mana' => 50,
         'fun' => 10,
@@ -46,6 +94,7 @@ RSpec.describe Action do
     context 'Work test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 0,
           'fun' => 5,
@@ -59,6 +108,7 @@ RSpec.describe Action do
     context 'Can\'t work test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 60,
           'fun' => 10,
@@ -72,6 +122,7 @@ RSpec.describe Action do
     context 'Relax_in_nature test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 0,
           'fun' => 0,
@@ -85,6 +136,7 @@ RSpec.describe Action do
     context 'Rest test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 95,
           'mana' => 40,
           'fun' => 9,
@@ -98,6 +150,7 @@ RSpec.describe Action do
     context 'Can\'t rest test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 60,
           'fun' => 10,
@@ -111,6 +164,7 @@ RSpec.describe Action do
     context 'Go_to_bar test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 90,
           'mana' => 70,
           'fun' => 0,
@@ -124,6 +178,7 @@ RSpec.describe Action do
     context 'Can\'t go_to_bar test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 60,
           'fun' => 10,
@@ -137,6 +192,7 @@ RSpec.describe Action do
     context 'Drink_a_lot test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 20,
           'mana' => 100,
           'fun' => 0,
@@ -150,6 +206,7 @@ RSpec.describe Action do
     context 'Can\'t drink_a_lot test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 60,
           'fun' => 10,
@@ -163,6 +220,7 @@ RSpec.describe Action do
     context 'Sing_in_metro test out alco range' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 20,
           'fun' => 0,
@@ -176,6 +234,7 @@ RSpec.describe Action do
     context 'Sing_in_metro test in alco range' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 60,
           'fun' => 0,
@@ -189,6 +248,7 @@ RSpec.describe Action do
     context 'Go_to_sleep test' do
       let(:expected) do
         {
+          'dead' => false,
           'hp' => 100,
           'mana' => 0,
           'fun' => 10,
@@ -197,6 +257,26 @@ RSpec.describe Action do
         }
       end
       it { expect(action.go_to_sleep(condition.clone)).to eq expected }
+    end
+
+    context 'Mana_death' do
+      expected = true
+      it { expect(Valera.check_valera_death(mana_death.clone)).to eq expected }
+    end
+
+    context 'Tiredness_death' do
+      expected = true
+      it { expect(Valera.check_valera_death(tiredness_death.clone)).to eq expected }
+    end
+
+    context 'Fun_death' do
+      expected = true
+      it { expect(Valera.check_valera_death(fun_death.clone)).to eq expected }
+    end
+
+    context 'Hp_death' do
+      expected = true
+      it { expect(Valera.check_valera_death(hp_death.clone)).to eq expected }
     end
   end
 end
